@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forview</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad, #2980b9);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: white;
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+        h1 {
+            font-size: 50px;
+            animation: heartbeat 1.5s infinite;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+        .heart {
+            font-size: 100px;
+            color: #ff66b2;
+            animation: pulse 1s infinite;
+        }
+        .message-container {
+            margin-top: 30px;
+            font-size: 24px;
+            line-height: 1.6;
+            animation: slideIn 2s ease-in-out;
+        }
+        .image-container {
+            margin-top: 30px;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .image-container img {
+            width: 300px; /* กำหนดความกว้าง */
+            height: 300px; /* กำหนดความสูง */
+            object-fit: cover; /* ปรับรูปภาพให้พอดีกับขนาดที่กำหนด */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .image-container img:hover {
+            transform: scale(1.1);
+        }
+        button {
+            background-color: #ff66b2;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff3385;
+            transform: translateY(-5px);
+        }
+        button:active {
+            transform: translateY(2px);
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes slideIn {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>ของขวัญจากเฮงเฮง</h1>
+    <div class="heart">💖</div>
+    <div class="message-container">
+        <p>Happy Valentine's Day ลิงน้อยย</p>
+        <p>เปิดเพลงฟังด้วยสิระหว่างดูรูป</p>
+    </div>
+    
+    <!-- เปลี่ยนจากวิดีโอเป็นเพลง -->
+    <div class="audio-container">
+        <audio controls autoplay loop>
+            <source src="soud/เพลงรัก Three Man Down Official MV.mp3" type="audio/mp3">
+            <p>เบราว์เซอร์ของคุณไม่รองรับการเล่นเพลง</p>
+        </audio>
+    </div>
+
+    <div class="image-container">
+        <img id="loveImage" src="soud/IMG_4775.jpeg" alt="คนน่ารักที่สุด">
+    </div>
+
+    <button onclick="changeMessage()">ลองคลิ๊กดู</button>
+    <button onclick="changeImage()">มีไรให้ดูด้วย</button>
+
+    <script>
+        // ฟังก์ชันเปลี่ยนข้อความ
+        function changeMessage() {
+            const messages = [
+                "วิวน่ารักเว้ยยย", 
+                "จุ๊บบๆ", 
+                "คิดฮอดเว้ยยยยยย",
+                "happy valentine ลิงง"
+            ];
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            document.querySelector("h1").textContent = messages[randomIndex];
+        }
+
+        // ฟังก์ชันเปลี่ยนรูปภาพ
+        let currentIndex = 0; // ตัวแปรเก็บตำแหน่งรูปปัจจุบัน
+
+function changeImage() {
+    const images = [
+        "soud/monky.avif",
+        "soud/h.avif",
+        "soud/cack.avif",
+        "soud/flower.avif"
+    ];
+    const imageElement = document.getElementById("loveImage");
+
+    // เพิ่มการค่อยๆ เปลี่ยนรูป
+    imageElement.style.opacity = 0; // ทำให้ภาพจางก่อน
+    setTimeout(function() {
+        imageElement.src = images[currentIndex]; // เปลี่ยนรูปภาพตามตำแหน่งปัจจุบัน
+        imageElement.style.opacity = 1; // ทำให้ภาพปรากฏขึ้นใหม่
+
+        // เพิ่มค่า currentIndex และวนกลับไปที่ 0 เมื่อถึงรูปสุดท้าย
+        currentIndex = (currentIndex + 1) % images.length;
+    }, 500); // รอให้ภาพจางลงก่อนที่จะเปลี่ยน
+}
+    </script>
+</body>
+</html>
